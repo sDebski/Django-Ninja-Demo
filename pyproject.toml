@@ -17,6 +17,7 @@ django-import-export = "^3.3.7"
 django-admin-interface = "^0.28.6"
 docutils = "^0.20.1"
 black = "^24.2.0"
+pydantic = {extras = ["email"], version = "^2.6.4"}
 
 
 [build-system]

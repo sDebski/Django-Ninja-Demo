@@ -22,7 +22,7 @@ def get_label(request, id: int):
 @router.post("", response={HTTPStatus.CREATED: LabelReadSchema})
 def create_label(request, label_data: LabelWriteSchema):
     label_data = label_data.model_dump()
-    return HTTPStatus.CREATED, models.Label.objects.create(label_data)
+    return HTTPStatus.CREATED, models.Label.objects.create(**label_data)
 
 
 @router.api_operation(
