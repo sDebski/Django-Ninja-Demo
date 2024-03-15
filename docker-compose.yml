@@ -10,13 +10,14 @@ services:
       db:
         condition: service_healthy
     volumes:
+      - static_volume:/app/staticfiles
       - .:/app
   
   db:
     image: postgres
     restart: always
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db_volume:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
@@ -29,6 +30,17 @@ services:
       timeout: 5s
       retries: 5
 
+  nginx:
+    build:
+      context: ./nginx
+    ports: 
+      - 80:80
+    depends_on:
+      - ninja
+    volumes:
+      - static_volume:/app/staticfiles
+
 
 volumes:
-  db-data:
+  db_volume:
+  static_volume:
