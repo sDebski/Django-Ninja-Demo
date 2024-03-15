@@ -59,7 +59,7 @@ def update_worker(request, id: int, worker_data: WorkerWriteSchema):
 
 
 @router.delete("{id}/", response={HTTPStatus.NO_CONTENT: None})
-def delete_Worker(request, id: int):
+def delete_worker(request, id: int):
     worker = get_object_or_404(models.Worker, id=id)
     worker.delete()
 
