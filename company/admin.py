@@ -8,13 +8,12 @@ from django.urls import reverse
 from django.utils.html import format_html
 from django.conf import settings
 
-from import_export.admin import ImportExportModelAdmin
 
 from company import models, inlines
 
 
 @admin.register(models.Worker)
-class WorkerAdmin(ImportExportModelAdmin):
+class WorkerAdmin(admin.ModelAdmin):
     list_display = (
         "email",
         "username",
@@ -24,12 +23,12 @@ class WorkerAdmin(ImportExportModelAdmin):
 
 
 @admin.register(models.Label)
-class LabelAdmin(ImportExportModelAdmin):
+class LabelAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
 
 @admin.register(models.Project)
-class ProjectAdmin(ImportExportModelAdmin):
+class ProjectAdmin(admin.ModelAdmin):
     list_display = (
         "name",
         "description",
@@ -96,12 +95,12 @@ class ProjectAdmin(ImportExportModelAdmin):
 
 
 @admin.register(models.ProjectCategory)
-class ProjectCategoryAdmin(ImportExportModelAdmin):
+class ProjectCategoryAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
 
 @admin.register(models.Task)
-class TaskAdmin(ImportExportModelAdmin):
+class TaskAdmin(admin.ModelAdmin):
     list_display = (
         "title",
         "description",
@@ -147,7 +146,7 @@ class TaskAdmin(ImportExportModelAdmin):
         """
         icon_html = f"""
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-            <a href="{reverse('admin:core_project_change', kwargs={"object_id": obj.project.pk})}">
+            <a href="{reverse('admin:company_project_change', kwargs={"object_id": obj.project.pk})}">
                 <img src="{settings.MEDIA_URL}{obj.project.icon.name}" style="{style}" />
             </a>
         </div>
@@ -202,7 +201,7 @@ class TaskAdmin(ImportExportModelAdmin):
 
 
 @admin.register(models.Comment)
-class CommentAdmin(ImportExportModelAdmin):
+class CommentAdmin(admin.ModelAdmin):
     list_display = ("content", "commented_on")
 
     def delete_model(self, request, obj):
@@ -217,6 +216,6 @@ class CommentAdmin(ImportExportModelAdmin):
 
     def commented_on(self, obj):
         a_html = f"""
-            <a href="{reverse('admin:core_task_change', kwargs={"object_id": obj.task.pk})}">{obj.task}</a>
+            <a href="{reverse('admin:company_task_change', kwargs={"object_id": obj.task.pk})}">{obj.task}</a>
         """
         return format_html(a_html)
