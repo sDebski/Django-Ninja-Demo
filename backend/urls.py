@@ -1,0 +1,19 @@
+from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
+from django.urls import path, include
+from ninja import NinjaAPI
+
+from devices.api import router as devices_router
+
+app = NinjaAPI()
+app.add_router("devices_api", devices_router)
+
+urlpatterns = [
+    path("", app.urls),
+    path("admin/doc/", include("django.contrib.admindocs.urls")),
+    path("admin/", admin.site.urls),
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
