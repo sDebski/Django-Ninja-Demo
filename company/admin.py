@@ -12,6 +12,7 @@ from import_export.admin import ImportExportModelAdmin
 
 from company import models, inlines
 
+
 @admin.register(models.Worker)
 class WorkerAdmin(ImportExportModelAdmin):
     list_display = (
@@ -91,9 +92,7 @@ class ProjectAdmin(ImportExportModelAdmin):
             request, "Task`s descriptions have been updated", messages.INFO
         )
 
-        return super().save_formset(
-            request, form, formset, change
-        )
+        return super().save_formset(request, form, formset, change)
 
 
 @admin.register(models.ProjectCategory)
