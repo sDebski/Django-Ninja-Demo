@@ -2,15 +2,11 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
-from ninja import NinjaAPI
 
-from devices.api import router as devices_router
-
-app = NinjaAPI()
-app.add_router("devices_api", devices_router)
+from backend.api import api
 
 urlpatterns = [
-    path("", app.urls),
+    path("api/", api.urls),
     path("admin/doc/", include("django.contrib.admindocs.urls")),
     path("admin/", admin.site.urls),
 ]

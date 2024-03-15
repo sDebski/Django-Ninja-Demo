@@ -16,6 +16,7 @@ django-cors-headers = "^4.3.1"
 django-import-export = "^3.3.7"
 django-admin-interface = "^0.28.6"
 docutils = "^0.20.1"
+black = "^24.2.0"
 
 
 [build-system]
