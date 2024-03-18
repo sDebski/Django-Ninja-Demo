@@ -10,11 +10,11 @@ class TaskReadSchema(ModelSchema):
 
 
 class TaskWriteSchema(ModelSchema):
-    title: str = None
-    status: str = None
-    description: str  = None
-    project: int = None
-    assigned_to: int = None
+    title: str
+    status: str
+    description: str
+    project: int
+    assigned_to: int
     labels: list[int] = None
 
     class Meta:
@@ -34,16 +34,16 @@ class TaskWriteSchema(ModelSchema):
     def check_worker_existance(cls, assigned_to: int):
         if not assigned_to:
             return assigned_to
-        
+
         if not models.Worker.objects.filter(id=assigned_to).exists():
             return TypeError("Assigned_to id is not valid")
         return assigned_to
 
     @validator("project")
-    def check_worker_existance(cls, project: int):
+    def check_project_existance(cls, project: int):
         if not project:
             return project
-        
+
         if not models.Project.objects.filter(id=project).exists():
             return TypeError("Project id is not valid")
         return project
