@@ -16,10 +16,10 @@ router = Router(tags=["Core"])
     },
     auth=None,
 )
-def login(request, credentials: LoginCredentials):
+def login(request, credentials: LoginCredentialsSchema):
     user = authenticate(
         request,
-        username=credentials.username,
+        username=credentials.login,
         password=credentials.password,
     )
 

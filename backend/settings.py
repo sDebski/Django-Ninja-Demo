@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "devices",
     "company",
     "core",
+    "knox",
 ]
 
 MIDDLEWARE = [
