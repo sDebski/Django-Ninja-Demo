@@ -15,7 +15,7 @@ class UserSchema(ModelSchema):
         )
 
 
-class LoginCredentials(Schema):
+class LoginCredentialsSchema(Schema):
     login: str
     password: str
 
