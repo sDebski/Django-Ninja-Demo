@@ -21,9 +21,9 @@ class ProjectWriteSchema(ModelSchema):
     @validator("category")
     def check_category(cls, category: str):
         categories = models.ProjectCategory.objects.all().values("name")
-        print(categories)
-        if category not in categories.values():
+        category_names = [category["name"] for category in categories]
+        if category not in category_names:
             raise TypeError(
-                f'Project Category not valid. Available statuses: {", ".join(list(categories.values()))}.'
+                f'Project Category not valid. Available names: {", ".join(category_names)}.'
             )
         return category
