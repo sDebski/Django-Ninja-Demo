@@ -27,9 +27,11 @@ def get_project(request, id: int):
     },
 )
 def create_project(request, project_data: ProjectWriteSchema):
+    category = get_object_or_404(models.ProjectCategory, name=project_data.category)
     project_data = project_data.model_dump()
+    project_data["category"] = category
 
-    return HTTPStatus.CREATED, models.Project.objects(**project_data)
+    return HTTPStatus.CREATED, models.Project.objects.create(**project_data)
 
 
 @router.api_operation(
