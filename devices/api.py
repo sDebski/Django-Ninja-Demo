@@ -3,7 +3,7 @@ from devices.models import *
 from devices.schemas import *
 from django.shortcuts import get_object_or_404
 
-router = Router()
+router = Router(tags=["Devices"])
 
 
 @router.get("devices", response=list[DeviceSchema])
